@@ -26,7 +26,7 @@ description: >-
   I really hope you find something interesting here.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://lanadz.com" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  [lanadz, lanadz-shopify]
+github_username:  lanadz
 linkedin_username: lanadz
 
 # Build settings
