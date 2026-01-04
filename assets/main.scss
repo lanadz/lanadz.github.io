@@ -1,0 +1,26 @@
+---
+---
+
+@import "minima";   // pulls in the theme from _sass/minima
+// add overrides below so they cascade after the theme
+
+.post-list{
+  .post-link {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    margin: 0;
+    color: #333;
+    background: #c9e0ff;
+    border-bottom: 1px solid #c9e0ff;
+    .post-meta {
+      font-size: 14px;
+    }
+
+  }
+  .post-excerpt {
+    font-size: 16px;
+    background-color: white;
+    margin-bottom: 25px;
+  }
+}
