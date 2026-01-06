@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<div class="home tags-page">
+  <h1 class="page-heading">{{ page.title | default: "Tags" }}</h1>
+
+  {% assign tags_list = site.tags | sort %}
+  {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+
+  {% if tags_list and tags_list.size > 0 %}
+    <div class="tags-list">
+      <h2>Browse by tag</h2>
+      <ul>
+        {% for tag in tags_list %}
+          {% assign tag_name = tag[0] %}
+          <li>
+            <a href="#{{ tag_name | slugify }}">
+              {{ tag_name }} ({{ tag[1].size }})
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="tag-groups">
+      {% for tag in tags_list %}
+        {% assign tag_name = tag[0] %}
+        <section class="tag-group" id="{{ tag_name | slugify }}">
+          <h3>{{ tag_name }}</h3>
+          <ul>
+            {% for post in tag[1] %}
+              <li>
+                <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+                <span class="post-date">{{ post.date | date: date_format }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No tags have been added yet.</p>
+  {% endif %}
+</div>

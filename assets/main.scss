@@ -4,14 +4,11 @@
 @import "minima";   // pulls in the theme from _sass/minima
 // add overrides below so they cascade after the theme
 
-$post-card-gap: $spacing-unit * 0.5;
+$gap: $spacing-unit * 0.5;
 
-
-$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$base-font-size:   16px !default;
-$base-font-weight: 400 !default;
-$small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 1.5 !default;
+a.site-title, a.site-title:visited {
+  font-weight: 600;
+}
 
 .post-list {
   list-style: none;
@@ -25,7 +22,7 @@ $base-line-height: 1.5 !default;
 
 .post-link {
   margin: 0;
-  padding: $post-card-gap*0.5 $post-card-gap ;
+  padding: $gap*0.5 $gap ;
   color:  $text-color;
   background: lighten($brand-color, 40%);
   border: 0;
@@ -33,11 +30,25 @@ $base-line-height: 1.5 !default;
   .post-meta {
     margin: 0;
     font-size: $small-font-size;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+
+    .tag {
+      display: inline-flex;
+      background: lighten($brand-color, 45%);
+      padding: 0 $gap*0.5;
+      margin-left: $gap*0.5;
+
+      &:first-of-type {
+        margin-left: auto;
+      }
+    }
   }
 
   & + .post-excerpt {
-    margin: 0 0 $post-card-gap;
-    padding: $post-card-gap 0;
+    margin: 0 0 $gap;
+    padding: $gap 0;
     background: $background-color;
 
 

@@ -18,7 +18,15 @@ layout: default
         </a>
         <br />
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        <div class="post-meta">{{ post.date | date: date_format }}</span>
+        <div class="post-meta">
+          {{ post.date | date: date_format }}
+
+          {% if post.tags != empty %}
+            {% for tag in post.tags %}
+              <a class="tag" href="/tags/page#{{ tag | slugify }}">{{ tag }}</a>
+            {% endfor %}
+          {% endif %}
+        </div>
 
       </li>
       {%- if site.show_excerpts -%}
