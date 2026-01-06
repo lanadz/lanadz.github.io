@@ -1,0 +1,49 @@
+---
+layout: post
+title: 'Rust TIL'
+date: 2026-01-05
+tags:
+  - rust
+keywords:
+  - rust
+
+---
+
+Today I had to deal with dependency vulnerability - `rkyv` for [rust_decimal](https://docs.rs/rust_decimal/latest/rust_decimal/)
+
+TLDR;
+
+> rkyv vulnerability in transitive dependency via rust_decimal 1.39.0. rust_decimal is at latest version and hasn't updated to rkyv 0.8.x yet. Will be fixed when rust_decimal updates.
+
+https://github.com/paupino/rust-decimal/issues/766
+
+Cool, but now what? Do I need to wait for a fix (it's a new year, people might still celebrating lol) Do I need to open pr just to add reason to `audit.toml`?
+
+I ended up creating `audit.toml` with that ignore entry, since we are not even using `rkyv` and it is optional dependency. But as I am writing this I already see that patch to `rkyv` was [merged](https://github.com/rkyv/rkyv/pull/645), so I probably won't need any `audit.toml`.
+
+And T.I.L is:
+- `cargo audit`
+  `cargo install cargo-audit` is required for that. We have `cargo audit` step in CI to show vulnerabilities. Awesome tool
+- there is such thing as [optional features](https://github.com/paupino/rust-decimal/blob/master/Cargo.toml#L33) in dependecies
+
+```toml
+[dependencies]
+rkyv = { default-features = false, features = ["size_32", "std"], optional = true, version = "0.7.42" }
+```
+
+- `cargo tree` Display a dependency graph
+  - `cargo tree -p rust_decimal -e features`
+  This will show you all dependecies for the package, and that packach will be a root (`-p`) and `-e` what kind of dependencies to show: features, build, all, etc.
+
+  - `cargo tree -i rust_decimal`. Inverts the tree and focuses on given package. It will show you if you have crate installed. In my case, I would have something like:
+
+```
+rust_decimal v1.39.0
+├── my_proj v0.19.0 (path/path/path)
+│   └── more path entries
+└── more entries (/path/path)
+```
+
+and if I try `cargo tree -i rkyv` - since I don't have it installed directly - no root to display 😊
+
+- and rust community is awesome and helpful, I spent only couple minutes to find the problem, and the issue was already created and people were addressing it only after couple hours since vulnerability was reported. Nice!!
