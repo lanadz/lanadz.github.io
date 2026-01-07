@@ -18,12 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Today I Learned
+title: TIL and Other Bugs
 email: svitlana.dzyuban@gmail.com
 description: >-
   Lana (Svitlana Dzyuban) - Software Engineer.
-  "T.I.L." goal is to keep and share gotchas, ideas, helpful info and just have fun.
-  I really hope you find something interesting here.
+  "TIL and Other Bugs" is a place to collect and share gotchas, ideas, usuful bits, and have a little fun.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://lanadz.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  lanadz
